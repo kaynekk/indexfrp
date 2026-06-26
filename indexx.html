@@ -1,0 +1,214 @@
+<!DOCTYPE html><html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>DM Payload Engine: Master Build</title>
+    <link href="https://fonts.googleapis.com/css2?family=Aldrich&family=Inter:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        * { box-sizing: border-box; }
+        body {
+            font-family: 'Aldrich', 'Inter', sans-serif;
+            background-color: #D2B48C; 
+            margin: 0;
+            padding: 15px 10px;
+            display: flex;
+            justify-content: center;
+            min-height: 100dvh; 
+        }
+        #app-container {
+            width: 100%;
+            max-width: 900px;
+            background: #FDF9F1;
+            border-radius: 8px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.3);
+            overflow: hidden;
+            padding-bottom: 40px;
+        }
+        header {
+            padding: 20px;
+            background: #CC5500; 
+            color: white;
+            font-weight: 600;
+            text-align: center;
+            font-size: 20px;
+            letter-spacing: 1px;
+            border-bottom: 3px solid #8B3A00;
+        }
+        .category-title {
+            color: #3E2723;
+            font-size: 16px;
+            font-weight: 600;
+            margin: 25px 20px 15px 20px;
+            padding-bottom: 5px;
+            border-bottom: 2px solid #CDB599;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .button-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(145px, 1fr));
+            gap: 12px;
+            padding: 0 20px;
+        }
+        .intent-link {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background-color: #3E2723;
+            color: #FDF9F1;
+            padding: 12px 8px;
+            border-radius: 6px;
+            border: 1px solid #3E2723;
+            font-weight: 600;
+            font-size: 12px;
+            text-align: center;
+            text-decoration: none;
+            cursor: pointer;
+            min-height: 60px; 
+            user-select: none;
+        }
+        .intent-link span {
+            font-size: 9px;
+            color: #CDB599;
+            margin-top: 5px;
+            font-family: 'Inter', sans-serif;
+            text-transform: uppercase;
+        }
+        .intent-link:hover { background-color: #5D4037; }
+        
+        .danger-btn { background-color: #8B0000; color: #FFF; border-color: #8B0000; }
+        .danger-btn span { color: #FFC0CB; }
+        .danger-btn:hover { background-color: #A52A2A; }
+
+        .samsung-btn { background-color: #034EA2; color: #FFF; border-color: #034EA2; }
+        .samsung-btn span { color: #8AB4F8; }
+        .samsung-btn:hover { background-color: #023875; }
+
+        #notification-toast {
+            position: fixed;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #3E2723;
+            color: #FFFFFF;
+            padding: 14px 20px;
+            border-radius: 4px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.4);
+            font-size: 13px;
+            font-weight: 600;
+            z-index: 1000;
+            transition: top 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            width: 90%;
+            max-width: 350px;
+            text-align: center;
+            border-left: 5px solid #CC5500;
+        }
+        #notification-toast.show { top: 20px; }
+    </style>
+</head>
+<body>
+
+    <div id="notification-toast">Ready.</div>
+
+    <div id="app-container">
+        <header>DM PAYLOAD ENGINE: MASTER BUILD</header>
+
+        <div class="category-title">Samsung Ecosystem</div>
+        <div class="button-grid">
+            <a href="intent://#Intent;scheme=samsungapps;package=com.sec.android.app.samsungapps;end;" class="intent-link samsung-btn">Galaxy Store <span>(Root App)</span></a>
+            <a href="intent://search/?keyword=Activity+Launcher#Intent;scheme=samsungapps;package=com.sec.android.app.samsungapps;end;" class="intent-link samsung-btn">Activity Launcher <span>(Auto-Search)</span></a>
+            <a href="intent://search/?keyword=Alliance+Shield#Intent;scheme=samsungapps;package=com.sec.android.app.samsungapps;end;" class="intent-link samsung-btn">Alliance Shield <span>(Auto-Search)</span></a>
+            <a href="intent://search/?keyword=Package+Disabler#Intent;scheme=samsungapps;package=com.sec.android.app.samsungapps;end;" class="intent-link samsung-btn">Package Disabler <span>(Auto-Search)</span></a>
+            <a href="intent://#Intent;scheme=samsungmembers;package=com.samsung.android.voc;end;" class="intent-link samsung-btn">Samsung Members <span>(Diagnostics)</span></a>
+            <a href="intent://#Intent;scheme=samsungpay;package=com.samsung.android.spay;end;" class="intent-link samsung-btn">Samsung Wallet <span>(Payments)</span></a>
+            <a href="intent://#Intent;scheme=samsungpass;package=com.samsung.android.samsungpass;end;" class="intent-link samsung-btn">Samsung Pass <span>(Biometrics)</span></a>
+            <a href="intent://#Intent;scheme=shealth;package=com.sec.android.app.shealth;end;" class="intent-link samsung-btn">Samsung Health <span>(Fitness)</span></a>
+            <a href="intent://#Intent;scheme=smartthings;package=com.samsung.android.oneconnect;end;" class="intent-link samsung-btn">SmartThings <span>(IoT Tools)</span></a>
+            <a href="intent://#Intent;scheme=bixby;package=com.samsung.android.bixby.agent;end;" class="intent-link samsung-btn">Bixby Voice <span>(Assistant)</span></a>
+            <a href="intent://#Intent;scheme=samsungnotes;package=com.samsung.android.app.notes;end;" class="intent-link samsung-btn">Samsung Notes <span>(Editor)</span></a>
+            <a href="intent://#Intent;scheme=samsungcloud;package=com.samsung.android.scloud;end;" class="intent-link samsung-btn">Samsung Cloud <span>(Sync/Backup)</span></a>
+        </div>
+
+        <div class="category-title">Factory Backdoors (Tap & Paste)</div>
+        <div class="button-grid">
+            <button onclick="copyAndDial('*#*#4636#*#*', 'Radio Info')" class="intent-link danger-btn">4636 Radio <span>(Type final *)</span></button>
+            <button onclick="copyAndDial('*#9900#', 'SysDump')" class="intent-link danger-btn">9900 SysDump <span>(Type final #)</span></button>
+            <button onclick="copyAndDial('*#0808#', 'USB Config')" class="intent-link danger-btn">0808 USB Config <span>(Type final #)</span></button>
+            <button onclick="copyAndDial('*#0*#', 'HW Test')" class="intent-link danger-btn">0*# HW Test <span>(Type final #)</span></button>
+            <button onclick="copyAndDial('*#2663#', 'TSP Firmware')" class="intent-link danger-btn">2663 Firmware <span>(Type final #)</span></button>
+            <button onclick="copyAndDial('*#06#', 'IMEI')" class="intent-link danger-btn">06 IMEI/SN <span>(Type final #)</span></button>
+            <button onclick="copyAndDial('*#*#7287#*#*', 'Pixel Diag')" class="intent-link danger-btn">Pixel Diagnostics <span>(Type final *)</span></button>
+            <button onclick="copyAndDial('*#*#426#*#*', 'FCM Diag')" class="intent-link danger-btn">FCM / Play <span>(Type final *)</span></button>
+        </div>
+
+        <div class="category-title">Dynamic App Payloads</div>
+        <div class="button-grid">
+            <button onclick="fireDynamic('dial')" class="intent-link">Dial Number... <span>(tel:)</span></button>
+            <button onclick="fireDynamic('sms')" class="intent-link">Send SMS... <span>(smsto:)</span></button>
+            <button onclick="fireDynamic('web')" class="intent-link">Open Web URL... <span>(https:)</span></button>
+            <button onclick="fireDynamic('maps')" class="intent-link">Maps / GPS... <span>(geo:)</span></button>
+            <button onclick="fireDynamic('playstore')" class="intent-link">Play Store App... <span>(market:)</span></button>
+            <button onclick="fireDynamic('youtube')" class="intent-link">YouTube... <span>(vnd.youtube:)</span></button>
+        </div>
+    </div> 
+
+    <script>
+        const toast = document.getElementById('notification-toast');
+
+        function triggerToastNotification(message) {
+            toast.innerText = message;
+            toast.classList.add('show');
+            setTimeout(() => { toast.classList.remove('show'); }, 4000);
+        }
+
+        // Factory Codes: Copies code minus the final character, opens dialer natively
+        function copyAndDial(secretCode, name) {
+            let dialCode = secretCode.slice(0, -1);
+            let finalChar = secretCode.slice(-1);
+            
+            navigator.clipboard.writeText(dialCode).then(() => {
+                triggerToastNotification(`Copied! Paste into dialer and type '${finalChar}' manually.`);
+                setTimeout(() => { window.location.href = `tel:`; }, 1800);
+            }).catch(err => {
+                triggerToastNotification(`Type manually: ${secretCode}`);
+                setTimeout(() => { window.location.href = `tel:`; }, 2000);
+            });
+        }
+
+        // Master Dynamic Payload Generator using intent:// wrapper
+        function fireDynamic(type) {
+            let promptMsg = "";
+            switch(type) {
+                case 'dial': promptMsg = "Enter phone number to dial:"; break;
+                case 'sms': promptMsg = "Enter phone number for SMS:"; break;
+                case 'web': promptMsg = "Enter URL (e.g., example.com):"; break;
+                case 'maps': promptMsg = "Enter address or GPS coordinates:"; break;
+                case 'playstore': promptMsg = "Enter package name (e.g., com.termux):"; break;
+                case 'youtube': promptMsg = "Enter YouTube search query:"; break;
+            }
+
+            let userInput = prompt(promptMsg);
+            if (!userInput || userInput.trim() === "") return;
+
+            let rawArg = userInput.trim();
+            let encodedArg = encodeURIComponent(rawArg);
+            let intentUrl = "";
+
+            // Wrapped all dynamics in Android's native intent:// structure for better bypass
+            switch(type) {
+                case 'dial': intentUrl = `intent:${encodedArg}#Intent;scheme=tel;end;`; break;
+                case 'sms': intentUrl = `intent:${encodedArg}#Intent;scheme=smsto;end;`; break;
+                case 'web': intentUrl = `intent://${rawArg.replace(/^https?:\/\//, '')}#Intent;scheme=https;end;`; break;
+                case 'maps': intentUrl = `intent:0,0?q=${encodedArg}#Intent;scheme=geo;package=com.google.android.apps.maps;end;`; break;
+                case 'playstore': intentUrl = `intent://details?id=${rawArg}#Intent;scheme=market;package=com.android.vending;end;`; break;
+                case 'youtube': intentUrl = `intent://results?search_query=${encodedArg}#Intent;scheme=vnd.youtube;package=com.google.android.youtube;end;`; break;
+            }
+
+            window.location.href = intentUrl;
+        }
+    </script>
+</body>
+</html>
+
+
